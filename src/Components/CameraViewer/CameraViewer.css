@@ -1,0 +1,9 @@
+.viewer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.toggle-camera-btn {
+  align-self: end;
+}
