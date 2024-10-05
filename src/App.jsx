@@ -1,19 +1,31 @@
-import { useRef, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import { useRef, useState } from "react";
 import { CameraViewer } from "./Components/CameraViewer/CameraViewer";
+import { ImagePreview } from "./Components/ImagePreview/ImagePreview";
 
 function App() {
   const videoRef = useRef();
   const cameraRef = useRef();
   const [cameraActive, setCameraActive] = useState(false);
+  const [image, setImage] = useState();
+  const [showPreview, setShowPreview] = useState(false);
 
   return (
     <>
-      <CameraViewer
-        {...{ videoRef, cameraActive, setCameraActive, cameraRef }}
-      />
+      {!showPreview ? (
+        <CameraViewer
+          {...{
+            videoRef,
+            cameraActive,
+            setCameraActive,
+            cameraRef,
+            setImage,
+            setShowPreview,
+          }}
+        />
+      ) : (
+        <ImagePreview {...{ image, setShowPreview }} />
+      )}
     </>
   );
 }
