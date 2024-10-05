@@ -1,6 +1,16 @@
 import "./ImagePreview.css";
 
 export function ImagePreview({ image, setShowPreview }) {
+  async function uploadImg(image) {
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ img: image }),
+    };
+
+    const result = await fetch("/api/image", options);
+    console.log("Post image result: ", result);
+  }
   return (
     <article className="viewer-container">
       <button
@@ -11,7 +21,7 @@ export function ImagePreview({ image, setShowPreview }) {
         New picture
       </button>
       <img src={image}></img>
-      <button>Upload</button>
+      <button onClick={() => uploadImg(image)}>Upload</button>
     </article>
   );
 }
