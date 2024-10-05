@@ -13,4 +13,25 @@ router.get("/images", async (req, res) => {
   }
 });
 
+router.post("/image", async (req, res) => {
+  console.log("body: ", req.body);
+
+  const { img } = req.body;
+  const image = {
+    img: img,
+    sum_postits: 0,
+    postits: [],
+  };
+
+  try {
+    let result = await fetchCollection("images").insertOne(image);
+    console.log("POST image result: ", result);
+
+    res.status(201).json(result);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Something went wrong");
+  }
+});
+
 export default router;
